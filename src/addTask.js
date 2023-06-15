@@ -23,14 +23,16 @@ const addTask = async (event) => {
         }).promise();
 
         return {
-            statusCode: 200,
+            status: 200,
             body: JSON.stringify(newTask)
         };
+
     } catch (error) {
+        console.log(error);
+
         return {
-            statusCode: 500,
-            error,
-            body: JSON.stringify(newTask)
+            status: 500,
+            error
         };
     }
 
