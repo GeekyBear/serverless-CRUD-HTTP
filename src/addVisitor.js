@@ -1,36 +1,34 @@
 const { v4 } = require('uuid');
 const AWS = require('aws-sdk');
 
-const addTask = async (event) => {
+const addVisitor = async (event) => {
 
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-    const { title, description } = JSON.parse(event.body);
+    const { firstname, lastname } = JSON.parse(event.body);
     const createdAt = new Date().toUTCString();
     const id = v4();
 
-    const newTask = {
+    const newVisitor = {
         id,
-        title,
-        description,
+        firstname,
+        lastname,
         createdAt,
         done: false,
     };
 
     try {
         await dynamodb.put({
-            TableName: 'TaskTable',
-            Item: newTask
+            TableName: 'VisitTable',
+            Item: newVisitor
         }).promise();
 
         return {
             status: 200,
-            body: JSON.stringify(newTask)
+            body: JSON.stringify(newVisitor)
         };
 
     } catch (error) {
-        console.log(error);
-
         return {
             status: 500,
             error
@@ -40,5 +38,5 @@ const addTask = async (event) => {
 }
 
 module.exports = {
-    addTask
+    addVisitor
 }
