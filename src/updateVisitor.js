@@ -1,23 +1,23 @@
 const AWS = require('aws-sdk');
 
-const updateTask = async (event) => {
+const updateVisitor = async (event) => {
     const dynamodb = new AWS.DynamoDB.DocumentClient();
 
     const { id } = event.pathParameters;
 
-    const { done, title, description } = JSON.parse(event.body);
+    const { firstname, lastname } = JSON.parse(event.body);
 
     const result = await dynamodb.update({
-        TableName: 'TaskTable',
+        TableName: 'VisitTable',
         Key: { id },
-        UpdateExpression: 'set done = :done, title = :title, description = :description',
+        UpdateExpression: 'set firstname = :firstname, lastname = :lastname',
         ExpressionAttributeValues: {
-            ':done': done,
-            ':title': title,
-            ':description': description,
+            ':firstname': firstname,
+            ':lastname': lastname,
         },
         ReturnValues: 'ALL_NEW'
     }).promise();
+
 
     return {
         status: 200,
@@ -26,5 +26,5 @@ const updateTask = async (event) => {
 };
 
 module.exports = {
-    updateTask
+    updateVisitor
 }

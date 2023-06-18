@@ -21,44 +21,44 @@ functions:
           path: /
           method: get
 
-  createTask:
-    handler: src/addTask.addTask
+  createVisitor:
+    handler: src/addVisitor.addVisitor
     events:
       - httpApi:
-          path: /tasks
+          path: /visitors
           method: post
 
-  getTasks:
-    handler: src/getTasks.getTasks
+  getVisitors:
+    handler: src/getVisitors.getVisitors
     events:
       - httpApi:
-          path: /tasks
+          path: /visitors
           method: get
 
-  getTask:
-    handler: src/getTask.getTask
+  getVisitor:
+    handler: src/getVisitor.getVisitor
     events:
       - httpApi:
-          path: /tasks/{id}
+          path: /visitors/{id}
           method: get
 
-  updateTask:
-    handler: src/updateTask.updateTask
+  updateVisitor:
+    handler: src/updateVisitor.updateVisitor
     events:
       - httpApi:
-          path: /tasks/{id}
+          path: /visitors/{id}
           method: put
   
-  deleteTask:
-    handler: src/deleteTask.deleteTask
+  deleteVisitor:
+    handler: src/deleteVisitor.deleteVisitor
     events:
       - httpApi:
-          path: /tasks/{id}
+          path: /visitors/{id}
           method: delete
 
 resources:
   Resources:
-    TaskTable:
+    VisitTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${env:DYNAMODB_TABLE}
