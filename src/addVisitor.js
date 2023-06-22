@@ -14,7 +14,6 @@ const addVisitor = async (event) => {
         firstname,
         lastname,
         createdAt,
-        done: false,
     };
 
     try {
@@ -24,7 +23,7 @@ const addVisitor = async (event) => {
         }).promise();
 
         return {
-            status: 200,
+            status: 201,
             body: JSON.stringify(newVisitor)
         };
 
